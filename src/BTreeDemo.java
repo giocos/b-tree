@@ -2,7 +2,7 @@ import java.util.TreeMap;
 
 public class BTreeDemo {
 
-    static void postOrder(final Node node) {
+    static void postOrder(final Node<Integer> node) {
         if (node == null) {
             return;
         }
@@ -11,7 +11,7 @@ public class BTreeDemo {
         System.out.print(node.getKey() + " ");
     }
 
-    static void preOrder(final Node node) {
+    static void preOrder(final Node<Integer> node) {
         if (node == null) {
             return;
         }
@@ -20,7 +20,7 @@ public class BTreeDemo {
         preOrder(node.getDx());
     }
 
-    static void inOrder(final Node node) {
+    static void inOrder(final Node<Integer> node) {
         if (node == null) {
             return;
         }
@@ -29,7 +29,7 @@ public class BTreeDemo {
         inOrder(node.getDx());
     }
 
-    static <T> boolean findElement(final T key, final Node node) {
+    static <T> boolean findElement(final T key, final Node<Integer> node) {
         if (node == null) {
             return false;
         }
@@ -40,7 +40,7 @@ public class BTreeDemo {
         return findElement(key, node.getDx()) || findElement(key, node.getSx());
     }
 
-    static int size(final Node node) {
+    static int size(final Node<Integer> node) {
         if (node == null) {
             return 0;
         }
@@ -48,7 +48,7 @@ public class BTreeDemo {
     }
 
     public static void main(String[] args) {
-        // leaf
+        // leafs
         final Node<Integer> leaf1 = new Node<>(14);
         final Node<Integer> leaf2 = new Node<>(13);
         final Node<Integer> leaf3 = new Node<>(11);
@@ -56,7 +56,7 @@ public class BTreeDemo {
         final Node<Integer> leaf5 = new Node<>(9);
         final Node<Integer> leaf6 = new Node<>(8);
 
-        // child
+        // childs
         final Node<Integer> child1 = new Node<>(7);
         final Node<Integer> child2 = new Node<>(6);
         final Node<Integer> child3 = new Node<>(5);
@@ -69,7 +69,7 @@ public class BTreeDemo {
         child4.setDx(leaf5);
         child4.setSx(leaf6);
 
-        // parent
+        // parents
         final Node<Integer> parent1 = new Node<>(3);
         final Node<Integer> parent2 = new Node<>(2);
 
@@ -89,12 +89,10 @@ public class BTreeDemo {
         preOrder(root);
         System.out.print("\npostOrder: ");
         postOrder(root);
-
-        System.out.println("\nBTree size: " + size(root));
-        System.out.println("Key 12 is"
-                + (findElement(9, root) ? " " : " NOT ")
-                + "present");
-
-        TreeMap tm = new TreeMap();
+        // find by key
+        final int key = 9;
+        System.out.println("\nKey " +  key + " is" + (findElement(key, root) ? " " : " NOT ") + "present");
+        // tree size
+        System.out.println("BTree size: " + size(root));
     }
 }
